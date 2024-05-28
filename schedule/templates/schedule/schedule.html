@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Työkierto</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Työkierto</h1>
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                {% for station in stations %}
+                    <th>{{ station.name }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for day in days %}
+                <tr>
+                    <td>{{ day.name }}</td>
+                    {% for station in stations %}
+                        <td>
+                            {% for entry in schedule %}
+                                {% if entry.day == day and entry.station == station %}
+                                    {{ entry.employee.name }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
